@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="30813f80801c4d19ab9a65121c7db862" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="BeeExchangeModel.Category" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeExchangeModel.Image" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeExchangeModel.OrderDetail" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeExchangeModel.Product" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeExchangeModel.Role" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeExchangeModel.User_Order" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeExchangeModel.User" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="BeeExchangeModel.FK__Product__CatID__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeExchangeModel.FK__Images__ProductI__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeExchangeModel.FK__OrderDeta__Order__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeExchangeModel.FK__OrderDeta__Produ__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeExchangeModel.FK__Product__UserID__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeExchangeModel.FK__Users__RoleID__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeExchangeModel.FK__User_Orde__UserI__5DCAEF64" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
