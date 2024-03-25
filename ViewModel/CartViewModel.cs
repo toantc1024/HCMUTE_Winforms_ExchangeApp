@@ -17,5 +17,13 @@ namespace Exchange_App.ViewModel
         }
 
         public User CurrentUser { get => _currentUser; set => _currentUser=value; }
+
+        public ICollection<CartItem> cartItems { get { 
+            
+                // get list of product from CartItems
+                
+
+            } set {; } }
+
     }
 }

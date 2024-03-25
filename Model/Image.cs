@@ -11,7 +11,9 @@ namespace Exchange_App.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+    using System.Windows.Media.Imaging;
+
     public partial class Image
     {
         public int ImageID { get; set; }
@@ -19,5 +21,23 @@ namespace Exchange_App.Model
         public byte[] ImageUrl { get; set; }
     
         public virtual Product Product { get; set; }
+        public BitmapImage ImageBitmap
+        {
+            get { return ConvertByteArrayToBitmapImage(ImageUrl); }
+            set {; }
+        }
+
+
+        public static BitmapImage ConvertByteArrayToBitmapImage(Byte[] bytes)
+        {
+            var stream = new MemoryStream(bytes);
+            stream.Seek(0, SeekOrigin.Begin);
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = stream;
+            image.EndInit();
+            return image;
+        }
+
     }
 }

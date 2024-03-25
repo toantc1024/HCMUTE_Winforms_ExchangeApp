@@ -13,5 +13,28 @@
                    HorizontalAlignment="Center"
                    TextDecorations="Underline"
                    Foreground="White"></TextBlock>
+
+        <ScrollViewer Background="White" >
+            <ListView x:Name="ListViewProducts"
+                      ItemsSource="{Binding cartItems}"
+                      SelectedItem="{Binding SelectedProduct}"
+                      ScrollViewer.CanContentScroll="True"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      BorderThickness="0"
+                      Background="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ProductID}">
+                            
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </UserControl>

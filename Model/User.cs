@@ -19,6 +19,7 @@ namespace Exchange_App.Model
         {
             this.Products = new HashSet<Product>();
             this.User_Order = new HashSet<User_Order>();
+            this.CartItems = new HashSet<CartItem>();
         }
     
         public int UserID { get; set; }
@@ -36,5 +37,7 @@ namespace Exchange_App.Model
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Order> User_Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartItem> CartItems { get; set; }
     }
 }

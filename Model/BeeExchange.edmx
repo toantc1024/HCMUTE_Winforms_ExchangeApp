@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BeeExchangeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BeeExchangeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CartItems">
+          <Key>
+            <PropertyRef Name="CartItemsID" />
+          </Key>
+          <Property Name="CartItemsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CatID" />
@@ -74,6 +83,18 @@
           <Property Name="Birthdate" Type="date" Nullable="false" />
           <Property Name="RoleID" Type="int" />
         </EntityType>
+        <Association Name="FK__CartItems__UserI__0A9D95DB">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="CartItems" Type="Self.CartItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CartItems">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Images__ProductI__5AEE82B9">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Images" Type="Self.Images" Multiplicity="*" />
@@ -158,7 +179,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CartDetail_ProductID">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CartItems" Type="Self.CartItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="CartItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BeeExchangeModelStoreContainer">
+          <EntitySet Name="CartItems" EntityType="Self.CartItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
@@ -166,6 +200,10 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Order" EntityType="Self.User_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CartItems__UserI__0A9D95DB" Association="Self.FK__CartItems__UserI__0A9D95DB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
           <AssociationSet Name="FK__Images__ProductI__5AEE82B9" Association="Self.FK__Images__ProductI__5AEE82B9">
             <End Role="Product" EntitySet="Product" />
             <End Role="Images" EntitySet="Images" />
@@ -194,9 +232,12 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_CartDetail_ProductID" Association="Self.FK_CartDetail_ProductID">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeeExchangeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -246,6 +287,7 @@
           <NavigationProperty Name="Images" Relationship="Self.FK__Images__ProductI__5AEE82B9" FromRole="Product" ToRole="Images" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__619B8048" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="User" Relationship="Self.FK__Product__UserID__5441852A" FromRole="Product" ToRole="Users" />
+          <NavigationProperty Name="CartItems" Relationship="BeeExchangeModel.FK_CartDetail_ProductID1" FromRole="Product" ToRole="CartItem" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -282,6 +324,7 @@
           <NavigationProperty Name="Products" Relationship="Self.FK__Product__UserID__5441852A" FromRole="Users" ToRole="Product" />
           <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__4E88ABD4" FromRole="Users" ToRole="Role" />
           <NavigationProperty Name="User_Order" Relationship="Self.FK__User_Orde__UserI__5DCAEF64" FromRole="Users" ToRole="User_Order" />
+          <NavigationProperty Name="CartItems" Relationship="BeeExchangeModel.FK__CartItems__UserI__0A9D95DB" FromRole="User" ToRole="CartItem" />
         </EntityType>
         <Association Name="FK__Product__CatID__534D60F1">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -403,7 +446,51 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="User_Order" EntitySet="User_Order" />
           </AssociationSet>
+          <EntitySet Name="CartItems" EntityType="BeeExchangeModel.CartItem" />
+          <AssociationSet Name="FK__CartItems__UserI__0A9D95DB" Association="BeeExchangeModel.FK__CartItems__UserI__0A9D95DB">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CartItem" EntitySet="CartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetail_ProductID1" Association="BeeExchangeModel.FK_CartDetail_ProductID1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CartItem" EntitySet="CartItems" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CartItem">
+          <Key>
+            <PropertyRef Name="CartItemsID" />
+          </Key>
+          <Property Name="CartItemsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="BeeExchangeModel.FK__CartItems__UserI__0A9D95DB" FromRole="CartItem" ToRole="User" />
+          <NavigationProperty Name="Product" Relationship="BeeExchangeModel.FK_CartDetail_ProductID1" FromRole="CartItem" ToRole="Product" />
+          <Property Name="Quantity" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__CartItems__UserI__0A9D95DB">
+          <End Type="BeeExchangeModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="BeeExchangeModel.CartItem" Role="CartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CartItem">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetail_ProductID1">
+          <End Type="BeeExchangeModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="BeeExchangeModel.CartItem" Role="CartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="CartItem">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -486,7 +573,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="CartItems">
+            <EntityTypeMapping TypeName="BeeExchangeModel.CartItem">
+              <MappingFragment StoreEntitySet="CartItems">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CartItemsID" ColumnName="CartItemsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

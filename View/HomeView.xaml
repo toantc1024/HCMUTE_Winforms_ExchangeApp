@@ -78,9 +78,6 @@
                 </StackPanel>
             </Grid>
         </materialDesign:ColorZone>
-        <Button Command="{Binding SetCountCommand}">
-            Click
-        </Button>
         <ScrollViewer Background="White"
                       Margin="2"
                       Grid.Row="1">

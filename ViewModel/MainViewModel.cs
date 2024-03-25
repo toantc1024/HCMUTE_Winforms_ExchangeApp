@@ -34,6 +34,7 @@ namespace Exchange_App.ViewModel
         public ICommand SetCount { get; set; }
         public MainViewModel(User user)
         {
+            CurrentUser = user;
             SelectedViewModel = new HomeViewModel(CurrentUser, SetCount);
             LoadedWindowCommand = new RelayCommand<Window>(
                 (p) => { return true; },

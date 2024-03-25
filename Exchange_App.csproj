@@ -99,6 +99,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeeExchange.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\CartItem.cs">
+      <DependentUpon>BeeExchange.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Category.cs">
       <DependentUpon>BeeExchange.tt</DependentUpon>
     </Compile>

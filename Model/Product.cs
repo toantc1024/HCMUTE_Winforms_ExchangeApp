@@ -11,7 +11,9 @@ namespace Exchange_App.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using System.Windows.Media.Imaging;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +21,21 @@ namespace Exchange_App.Model
         {
             this.Images = new HashSet<Image>();
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.CartItems = new HashSet<CartItem>();
         }
-    
+
+        public BitmapImage GetPreviewImage
+        {
+            get
+            {
+                return this.Images.First().ImageBitmap;
+            }
+            set
+            {
+                ;
+            }
+        }
+
         public int ProductID { get; set; }
         public int Quantity { get; set; }
         public string Info_des { get; set; }
@@ -38,5 +53,7 @@ namespace Exchange_App.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartItem> CartItems { get; set; }
     }
 }

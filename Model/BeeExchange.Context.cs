@@ -32,5 +32,6 @@ namespace Exchange_App.Model
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User_Order> User_Order { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<CartItem> CartItems { get; set; }
     }
 }
