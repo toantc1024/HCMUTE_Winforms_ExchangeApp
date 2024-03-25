@@ -34,12 +34,7 @@
                     <ColumnDefinition Width="1.5*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="80*" />
-                        <RowDefinition Height="20*" />
-                    </Grid.RowDefinitions>
-
+                <StackPanel Margin="15">
                     <Border Height="200"
                             Padding="3 0 3 0"
                             CornerRadius="10"
@@ -51,7 +46,7 @@
                                         x:Name="imageProduct" />
                         </Border.Background>
                     </Border>
-                </Grid>
+                </StackPanel>
 
                 <StackPanel Grid.Column="1">
 

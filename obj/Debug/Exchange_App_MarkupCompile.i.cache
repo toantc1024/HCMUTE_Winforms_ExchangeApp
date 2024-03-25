@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Exchange_App\App.xaml
-8-516709478
+16102550250
 3-1893542077
-34-749044444
+42322898112
 23-1785620422
-CustomUserControls\ControlBarUC.xaml;CustomUserControls\PreviewImageUC.xaml;LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\CartView.xaml;View\HomeView.xaml;View\ProductDetailsView.xaml;
+CustomUserControls\ControlBarUC.xaml;CustomUserControls\PreviewImageUC.xaml;LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\AddProductView.xaml;View\CartView.xaml;View\CheckoutView.xaml;View\HomeView.xaml;View\LoginView.xaml;View\OrderDetailsView.xaml;View\OrderView.xaml;View\ProductDetailsView.xaml;View\ProductManagerView.xaml;View\SignUpView.xaml;View\UserView.xaml;
 
-False
+True
 
